@@ -60,6 +60,9 @@ def health_check():
 
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
+    print("[*] Simple webhook handler hit!")
+    logging.info("Simple webhook received")
+    return "OK", 200  #
     print("[*] /webhook endpoint was hit!")
     logging.info("Received a POST request on /webhook")
     print("[*] Request method:", request.method)
