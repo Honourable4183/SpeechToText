@@ -56,6 +56,10 @@ def health_check():
 
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
+    print("[*] /webhook endpoint was hit!")
+    logging.info("Received a POST request on /webhook")
+    print("[*] Request method:", request.method)
+    print("[*] Request data:", request.get_data().decode('utf-8')) 
     if request.method == "GET":
         return "Webhook is live!", 200
 
