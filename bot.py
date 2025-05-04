@@ -46,7 +46,7 @@ def send_message(chat_id, text):
     resp = requests.post(f"{TG_API}/sendMessage", data={"chat_id": chat_id, "text": text})
     print("[*] Telegram sendMessage response:", resp.text)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def health_check():
     return "Bot is running!", 200
 
