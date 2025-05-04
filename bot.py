@@ -39,29 +39,35 @@ def transcribe(audio_bytes):
     }
     response = requests.post("https://api.deepgram.com/v1/listen", headers=headers, data=audio_bytes)
     print("[*] Deepgram response:", response.json())
-    return response.json()["results"]["channels"][0]["alternatives"][0]["transcript"]
+    try:
+        return response.json()["results"]["channels"][0]["alternatives"][0]["transcript"]
+    except (KeyError, IndexError, TypeError):
+        print("[!] Error extracting transcript from Deepgram response.")
+        return ""
 
 def send_message(chat_id, text):
     print(f"[*] Sending message to chat_id {chat_id}")
     resp = requests.post(f"{TG_API}/sendMessage", data={"chat_id": chat_id, "text": text})
     print("[*] Telegram sendMessage response:", resp.text)
 
-@app.route("/webhook", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def health_check():
     return "Bot is running!", 200
 
-def webhook():
+@app.route("/webhook", methods=["POST"])
+def webhook_handler():
     if request.method == "GET":
         return "Webhook is live!", 200
-        
+
     data = request.get_json()
     print("[*] Webhook received:", data)
     logging.info("Received data: %s", data)
 
     try:
-        if "voice" in data["message"] or "audio" in data["message"]:
+        if "message" in data and ("voice" in data["message"] or "audio" in data["message"]):
             logging.info("Voice or audio detected")
-            file_id = data["message"].get("voice", data["message"].get("audio"))["file_id"]
+            file_info = data["message"].get("voice") or data["message"].get("audio")
+            file_id = file_info["file_id"]
             chat_id = data["message"]["chat"]["id"]
 
             file_path = get_file_path(file_id)
@@ -77,8 +83,11 @@ def webhook():
 
             send_message(chat_id, transcript)
         else:
-            print("[!] Message does not contain voice or audio.")
+            print("[!] Message does not contain voice or audio or is malformed.")
     except Exception as e:
         print("[!] General error in webhook:", e)
 
-    return "OK"
+    return "OK", 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
