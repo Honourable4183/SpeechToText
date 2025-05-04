@@ -9,8 +9,8 @@ BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
 DEEPGRAM_API_KEY = "ef38b9b5-2bc1-4326-9d4f-a14e2d50baf4"
 
 # Get secrets from environment variables (don't paste actual tokens directly in code)
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY")
+BOT_TOKEN = os.getenv(BOT_TOKEN)
+DEEPGRAM_API_KEY = os.getenv(DEEPGRAM_API_KEY)
 
 if not BOT_TOKEN or not DEEPGRAM_API_KEY:
     raise ValueError("BOT_TOKEN and DEEPGRAM_API_KEY must be set in environment variables.")
