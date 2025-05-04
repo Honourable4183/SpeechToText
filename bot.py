@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, request
 import logging
+@app.route("/", methods=["GET", "POST"])
 
 logging.basicConfig(level=logging.INFO)
 
@@ -49,6 +50,9 @@ def send_message(chat_id, text):
 
 @app.route("/", methods=["POST"])
 def webhook():
+    if request.method == "GET":
+        return "Webhook is live!", 200
+        
     data = request.get_json()
     print("[*] Webhook received:", data)
     logging.info("Received data: %s", data)
