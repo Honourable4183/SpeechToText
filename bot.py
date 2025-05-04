@@ -1,6 +1,9 @@
 import os
 import requests
 from flask import Flask, request
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
 DEEPGRAM_API_KEY = "ef38b9b5-2bc1-4326-9d4f-a14e2d50baf4"
@@ -48,6 +51,7 @@ def send_message(chat_id, text):
 def webhook():
     data = request.get_json()
     print("[*] Webhook received:", data)
+    logging.info("Received data: %s", data)
 
     try:
         if "voice" in data["message"] or "audio" in data["message"]:
