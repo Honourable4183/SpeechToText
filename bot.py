@@ -47,6 +47,9 @@ def send_message(chat_id, text):
     print("[*] Telegram sendMessage response:", resp.text)
 
 @app.route("/", methods=["GET", "POST"])
+def health_check():
+    return "Bot is running!", 200
+
 def webhook():
     if request.method == "GET":
         return "Webhook is live!", 200
