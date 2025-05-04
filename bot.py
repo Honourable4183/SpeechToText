@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
-DEEPGRAM_API_KEY = "ef38b9b5-2bc1-4326-9d4f-a14e2d50baf4"
+DEEPGRAM_API_KEY = "40c5039a98a95ec960e242c60441d8f029e650dd"
 
 # Get secrets from environment variables (don't paste actual tokens directly in code)
 BOT_TOKEN = os.getenv("BOT_TOKEN")
