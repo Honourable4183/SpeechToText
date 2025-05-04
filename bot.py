@@ -1,9 +1,7 @@
 import os
 import requests
 from flask import Flask, request
-import logging
-@app.route("/", methods=["GET", "POST"])
-
+import loggin
 logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
@@ -48,7 +46,7 @@ def send_message(chat_id, text):
     resp = requests.post(f"{TG_API}/sendMessage", data={"chat_id": chat_id, "text": text})
     print("[*] Telegram sendMessage response:", resp.text)
 
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["GET", "POST"])
 def webhook():
     if request.method == "GET":
         return "Webhook is live!", 200
