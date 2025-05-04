@@ -3,7 +3,7 @@ import requests
 from flask import Flask, request
 
 BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
-DEEPGRAM_API_KEY = "5492e41bdcf6b3220831d20c308393d2c7585032"
+DEEPGRAM_API_KEY = "ef38b9b5-2bc1-4326-9d4f-a14e2d50baf4"
 
 # Get secrets from environment variables (don't paste actual tokens directly in code)
 BOT_TOKEN = os.getenv("BOT_TOKEN")
