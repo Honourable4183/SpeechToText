@@ -1,7 +1,7 @@
 import os
 import requests
 from flask import Flask, request
-import loggin
+import logging
 logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = "7961972146:AAGkgOnZafCIueCp8gRjGtFOzaqbt-jiDRU"
