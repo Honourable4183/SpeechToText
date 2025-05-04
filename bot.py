@@ -55,6 +55,7 @@ def webhook():
 
     try:
         if "voice" in data["message"] or "audio" in data["message"]:
+            logging.info("Voice or audio detected")
             file_id = data["message"].get("voice", data["message"].get("audio"))["file_id"]
             chat_id = data["message"]["chat"]["id"]
 
